@@ -32,23 +32,13 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 0.5rem 0;
-	line-height: 1.2;
+	line-height: 1.5;
 	font-weight: bold;
 	font-size: 1.2rem;
 }
 a {
 	color: var(--accent);
 	font-weight: bold;
-}
-
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
 }
 
 .sr-only {

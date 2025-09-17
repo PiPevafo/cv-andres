@@ -16,6 +16,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description } = Astro.props;
 ---
 
+<!-- KaTeX CSS for math rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.css">
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />

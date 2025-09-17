@@ -20,7 +20,6 @@ import HeaderLink from './HeaderLink.astro';
 		display: flex;
 		justify-content: center;
 		margin: 0;
-		padding: 0 1em;
 		border-bottom: 1px solid var(--gray);
 	}
 	h2 {
@@ -37,9 +36,11 @@ import HeaderLink from './HeaderLink.astro';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		width: 800px;
+		max-width: calc(100% - 2em);
 	}
 	nav a {
-		padding: 1em 0.5em;
+		padding: 0.7em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;

@@ -3,8 +3,10 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import kevinImage from '../assets/kevin-image.jpg';
-import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+
+const home = await getEntry('single', 'home');
+const { Content } = await home!.render();
 ---
 
 <!doctype html>
@@ -16,25 +18,9 @@ import { Image } from 'astro:assets';
 		<Header />
 
 		<main>
-			<h1>Kevin Giraldo, Undergraduate Physics Student</h1>
-
-			<Image src={kevinImage} alt="Kevin Giraldo" class="image-hero" />
-
-			<p>
-				Welcome! My name is Kevin Giraldo, and I am a final-year undergraduate student in Physics at the University of Valle in Cali, Colombia. On this website you can find my research interests, a list of my draft study notes and talk slides, as well as several independent projects I have carried out. Feel free to reach out and contact me here.
-			</p>
-
-			<p>Here is my <a href="https://drive.google.com/drive/folders/1ovTTqRdGAx7LHVAEgZNix6tk-D6_IYzm?usp=sharing" target="_blank">CV (2025)</a>.</p>
+			<Content />
 		</main>
 
 		<Footer />
 	</body>
 </html>
-
-
-<style>
-	.image-hero {
-		max-width: 100%;
-		height: auto;
-	}
-</style>

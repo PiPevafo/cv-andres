@@ -1,9 +1,8 @@
 ---
-title: "Simulating Open Quantum Systems with Tensor Networks and TEBD"
-slug: "proj-1"
+title: "Project 2"
+slug: "proj-2"
 year: 2023
 ---
-
 
 Similar to closed systems, tensor networks and TEBD can be used to simulate the time evolution of open systems. This works through vectorizing the density matrix (a matrix product operator) so that it looks like a state (a matrix product state). In this case the time-evolution is given by
 
