@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'Kevin Giraldo';
 export const SITE_DESCRIPTION = 'Kevin Giraldo\'s personal website';
+export const BASE_URL = '/cv-page-template';
