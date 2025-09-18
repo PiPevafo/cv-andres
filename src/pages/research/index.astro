@@ -2,9 +2,17 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
+import ListContainer from '../../components/ListContainer.astro';
+import ListElement from '../../components/ListElement.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { getCollection, getEntry, render } from 'astro:content';
 
 const title = `Research - ${SITE_TITLE}`;
+
+const research = await getCollection('research');
+
+const researchInfo = await getEntry('single', 'research');
+const { Content } = await researchInfo!.render();
 ---
 
 <!doctype html>
@@ -15,10 +23,21 @@ const title = `Research - ${SITE_TITLE}`;
 	<body>
 		<Header />
 		<main>
+			<Content />
+
 			<section>
-				<ul>
-					<a href="#">Hola</a>
-				</ul>
+				<ListContainer>
+					{research.map(async (item) => {
+						const { Content } = await render(item);
+						return (
+							<ListElement
+								key={item.data.slug}
+								data={item.data}
+								Content={Content}
+							/>
+						);
+					})}
+				</ListContainer>
 			</section>
 		</main>
 		<Footer />

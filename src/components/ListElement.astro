@@ -1,0 +1,71 @@
+---
+const { key, data, Content } = Astro.props;
+
+const classIconUp = `icon-${data.slug}-svg-up`;
+const classIconDown = `icon-${data.slug}-svg-down`;
+---
+
+<li key={key}>
+    <button
+        class='toggle-element'
+        onclick={`toggle('${data.slug}')`}
+    >
+		<div class={classIconDown} >
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+		</div>
+
+		<div class={classIconUp} style='display: none;'>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg>
+		</div>
+
+        <div>
+			<h3>{data.title}</h3>
+			<slot />
+		</div>
+    </button>
+
+    <div id={data.slug} class='toggle-content' style='display:none;'>
+        <Content />
+    </div>
+</li>
+
+
+<style>
+    li {
+        margin: 0;
+        padding: 0;
+		margin-bottom: 0.5rem;
+		list-style: none;
+    }
+    .toggle-element {
+		background: none;
+		border: none;
+		text-align: left;
+		cursor: pointer;
+		border: 2px solid transparent;
+		width: 100%;
+		transition: border-bottom 0.2s ease-in-out;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.2rem;
+
+	}
+	.toggle-element h3 {
+		margin: 0;
+		padding: 0;
+		font-size: 1.1rem;
+	}
+	.toggle-element:hover  {
+		border-bottom: 2px solid var(--black);
+	}
+
+	.toggle-content {
+		margin-top: 0.5rem;
+		margin-bottom: 1.5rem;
+		padding-left: 1rem;
+	}
+	.toggle-element:focus {
+		outline: none;
+	}
+</style>

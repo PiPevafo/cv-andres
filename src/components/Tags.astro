@@ -1,0 +1,38 @@
+---
+const { tagList } = Astro.props;
+---
+
+{
+    tagList.length > 0 && (
+        <ul class='tag-list'>
+            {tagList.map((tag) => (
+                <li class='tag' key={tag}>
+                    {tag}
+                </li>
+            ))}
+        </ul>
+    )
+}
+
+<style>
+    .tag-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.1rem;
+    }
+    .tag {
+        background-color: var(--light-gray);
+        color: var(--dark-gray);
+        padding: 0;
+        border-radius: 0.3rem;
+        border: 1px solid var(--gray);
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+</style>
