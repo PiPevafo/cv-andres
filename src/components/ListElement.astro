@@ -18,7 +18,7 @@ const classIconDown = `icon-${data.slug}-svg-down`;
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg>
 		</div>
 
-        <div>
+        <div class="toggle-text">
 			<h3>{data.title}</h3>
 			<slot />
 		</div>
@@ -31,6 +31,12 @@ const classIconDown = `icon-${data.slug}-svg-down`;
 
 
 <style>
+	svg{
+		width: 1.5rem;
+		height: 1.5rem;
+		margin: 0;
+		padding: 0;
+	}
     li {
         margin: 0;
         padding: 0;
@@ -48,8 +54,13 @@ const classIconDown = `icon-${data.slug}-svg-down`;
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0.2rem;
-
+		padding: 0.5rem 0;
+	}
+	.toggle-text {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
 	}
 	.toggle-element h3 {
 		margin: 0;
@@ -57,13 +68,11 @@ const classIconDown = `icon-${data.slug}-svg-down`;
 		font-size: 1.1rem;
 	}
 	.toggle-element:hover  {
-		border-bottom: 2px solid var(--black);
+		border-bottom: 2px solid var(--gray);
 	}
 
 	.toggle-content {
-		margin-top: 0.5rem;
-		margin-bottom: 1.5rem;
-		padding-left: 1rem;
+		padding-left: 2rem;
 	}
 	.toggle-element:focus {
 		outline: none;

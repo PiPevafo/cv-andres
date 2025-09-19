@@ -2,10 +2,8 @@
 updated: "March 2025"
 ---
 
-import SimpleImage from '../../components/SimpleImage.astro';
-import testImage from '../../assets/test2.png';
+import { BASE_URL } from '../../consts';
 
-
-<SimpleImage src={testImage} />
+<img src={BASE_URL + "/images/test2.png"} alt="Lindblad equation" style="width: 100%; height: auto;"/>
 
 You can reach me via email at kevin@example.com.

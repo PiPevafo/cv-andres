@@ -1,13 +1,23 @@
 ---
 import { BASE_URL } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import HeaderDropdown from './HeaderDropdown.astro';
 ---
 
 <header>
 	<nav>
-		<div class="internal-links">
-			<HeaderLink href={`${BASE_URL}/`} main={true}>KEVIN GIRALDO</HeaderLink>
-			<HeaderLink href={`${BASE_URL}/research`}>RESEARCH</HeaderLink>
+		<div class='internal-links'>
+			<HeaderLink href={`${BASE_URL}/`} main={true}
+				>KEVIN GIRALDO</HeaderLink
+			>
+			<HeaderDropdown
+				label='RESEARCH'
+				href={`${BASE_URL}/research`}
+				items={[
+					{ label: 'PUBLICATIONS', href: `${BASE_URL}/publications` },
+					{ label: 'SLIDES', href: `${BASE_URL}/slides` },
+				]}
+			/>
 			<HeaderLink href={`${BASE_URL}/projects`}>PROJECTS</HeaderLink>
 			<HeaderLink href={`${BASE_URL}/contact`}>CONTACT</HeaderLink>
 		</div>
@@ -21,15 +31,6 @@ import HeaderLink from './HeaderLink.astro';
 		justify-content: center;
 		margin: 0;
 		border-bottom: 1px solid var(--gray);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
 	}
 	nav {
 		margin: auto;
@@ -48,14 +49,5 @@ import HeaderLink from './HeaderLink.astro';
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
 	}
 </style>

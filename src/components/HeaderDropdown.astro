@@ -1,0 +1,161 @@
+---
+const { label, href = null, items = [], class: className } = Astro.props;
+
+const norm = (p: string) => new URL(p, Astro.site ?? 'http://x').pathname.replace(/\/+$/, '');
+
+  const here = Astro.url.pathname.replace(/\/+$/, '');
+
+const candidateHrefs = [href, ...items.map((i) => i.href)].filter(
+  Boolean,
+) as string[];
+
+const isActive = candidateHrefs.some((h) => {
+  const t = norm(h);
+  return here === t || here.startsWith(t + '/');
+});
+---
+
+<div class:list={['dropdown', className, { active: isActive }]}>
+  <details class='dd'>
+    <summary class='trigger' aria-haspopup='menu'>
+      <span>{label}</span>
+      <svg
+        class='chev'
+        width='12'
+        height='12'
+        viewBox='0 0 20 20'
+        aria-hidden='true'
+      >
+        <path
+          d='M5 7l5 5 5-5'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'></path>
+      </svg>
+    </summary>
+  </details>
+
+  <ul class='menu' role='menu'>
+    {
+      href && (
+        <li role='none'>
+          <a role='menuitem' href={href}>
+            {label}
+          </a>
+        </li>
+      )
+    }
+    {
+      items.map((it) => (
+        <li role='none'>
+          <a role='menuitem' href={it.href}>
+            {it.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.65em 0.8em;
+    cursor: pointer;
+    list-style: none;
+  }
+  .trigger span {
+    display: inline-block;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    font-size: 1rem;
+    color: var(--black);
+    font-weight: bold;
+  }
+  .trigger::-webkit-details-marker {
+    display: none;
+  }
+  .chev {
+    transition: transform 0.15s ease;
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 18rem;
+    margin: 0;
+    padding: 0.25rem 0;
+    list-style: none;
+    background: var(--white, #fff);
+    border: 1px solid var(--gray, #ddd);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    display: none;
+    z-index: 1000;
+  }
+
+  /* Abre por click/teclado */
+  .dd[open] + .menu {
+    display: block;
+  }
+
+  .dd[open] summary {
+    border-bottom: 4px solid var(--gray);
+  }
+
+  .dd[open] ~ .chev,
+  .dd[open] + .menu ~ .chev {
+    transform: rotate(180deg);
+  } /* opcional */
+
+
+
+
+
+
+
+
+  /* Abre por hover en desktop */
+  @media (hover: hover) and (pointer: fine) {
+    /* 1) mientras pasas el mouse por el trigger */
+    .dropdown:has(.trigger:hover) .menu {
+      display: block;
+    }
+    /* 2) y también si el mouse está sobre el panel */
+    .dropdown:has(.menu:hover) .menu {
+      display: block;
+    }
+    .dropdown:has(.trigger:hover) .chev,
+    .dropdown:has(.menu:hover) .chev {
+      transform: rotate(180deg);
+    }
+
+    .dropdown:has(.trigger:hover) summary,
+    .dropdown:has(.menu:hover) summary {
+      border-bottom: 4px solid var(--gray);
+    }
+  }
+
+  .menu a {
+    display: block;
+    padding: 0.7rem 1rem;
+    color: var(--black, #111);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .menu a:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  /* estado activo del tab padre */
+  .dropdown.active > .trigger,
+  .dropdown.active summary {
+    border-bottom: 4px solid var(--accent);
+  }
+</style>

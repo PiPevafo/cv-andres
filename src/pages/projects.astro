@@ -1,15 +1,14 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import ListContainer from '../../components/ListContainer.astro';
-import ListElement from '../../components/ListElement.astro';
-import Tags from '../../components/Tags.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import ListContainer from '../components/ListContainer.astro';
+import ListElement from '../components/ListElement.astro';
+import Tags from '../components/Tags.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection, getEntry, render } from 'astro:content';
 
 const projects = await getCollection('projects');
-console.log({ test: projects[2] });
 
 const projectsByYear = projects.reduce((acc, project) => {
 	const year = project.data.year;
@@ -22,7 +21,6 @@ const projectsByYear = projects.reduce((acc, project) => {
 
 const title = `Projects - ${SITE_TITLE}`;
 const projectsInfo = await getEntry('single', 'projects');
-console.log({ projectsInfo });
 const { Content } = await projectsInfo!.render();
 ---
 

@@ -5,14 +5,14 @@ year: 2025
 tags: ["quantum", "tensor networks", "TEBD"]
 importance: 2
 ---
-import SimpleImage from '../../components/SimpleImage.astro';
-import testImage from '../../assets/test1.png';
 
-
+import { BASE_URL } from '../../consts';
 
 Similar to closed systems, tensor networks and TEBD can be used to simulate the time evolution of open systems. This works through vectorizing the density matrix (a matrix product operator) so that it looks like a state (a matrix product state). In this case the time-evolution is given by
 
-<SimpleImage src={testImage} />
+<img src={BASE_URL + "/images/test1.png"} loading="lazy" alt="Lindblad equation" style="width: 100%; height: auto;"/>
+
+where the Lindbladian superoperator is given by
 
 which could also have been obtained through naive integration of the density matrix
 
