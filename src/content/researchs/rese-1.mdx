@@ -1,13 +1,18 @@
 ---
-title: "Controlling Systems and Engineering Responses in Dissipative Quantum Systems"
+title: "Architecture Dependence in the Many-Body Entanglement Structure of Local Quantum Circuits"
 slug: "rese-1"
-year: 2023
-importance: 1
+year: 2025
+importance: 3
+tags: ["Entanglement", "Tensor networks", "Qiskit", "Undergraduate thesis"]
 ---
 
+**Quantic Group, Universidad del Valle · Jan 2024 – Jun 2025.** Advisors: Javier Madroñero, PhD; William Esteban Salazar (CQT, National University of Singapore).
 
-Similar to closed systems, tensor networks and TEBD can be used to simulate the time evolution of open systems. This works through vectorizing the density matrix (a matrix product operator) so that it looks like a state (a matrix product state). In this case the time-evolution is given by
+Developed a novel and efficient graph-based algorithm, grounded in tensor-network representations of local quantum circuits, for estimating bipartite entanglement entropies and analyzing architecture-dependent saturation. Using the minimal-cut formalism, I derived classical upper bounds and established a system-size-dependent entanglement velocity, $v_E \sim 1/2L$, confirmed analytically and numerically with KPZ scaling.
 
-which could also have been obtained through naive integration of the density matrix
+The framework was extended to doped circuits with three-qubit non-Clifford gates, obtaining analytical lower bounds and characterizing deviations in universality and non-stabilizer resource generation. A paper is under construction.
 
-Here I provide some code I have written in a Jupyter notebook to exactly simulate Lindblad dynamics for small open systems, and in another notebook provide code to simulate Lindblad dynamics using tensor networks and TEBD. While the number of sites is small in these example codes this is to benchmark the tensor network methods against the exact methods, and the tensor network methods can handle spin chains of length L = 64 with bond dimension χ = 20 in one hour without further optimization.
+Distinguished as a *Meritorious Thesis* by the Faculty Council of Universidad del Valle (2026).
+
+<a href="https://drive.google.com/file/d/13TLiMOkwhJGLX3T3T9otWwUNry9WKWxw/view?usp=sharing" target="_blank" rel="noopener">Thesis</a> ·
+<a href="https://quantic.correounivalle.edu.co/home" target="_blank" rel="noopener">Quantic Group</a>
