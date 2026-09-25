@@ -11,32 +11,29 @@ const info = await getEntry('single', 'presentations');
 const { Content: Intro } = await render(info!);
 
 const all = (await getCollection('presentations')).sort(
-	(a, b) => b.data.year - a.data.year,
+	(a, b) => b.data.year - a.data.year || b.data.order - a.data.order,
 );
 
-const sections = [
-	{ heading: 'Posters', kinds: ['poster'] },
-	{ heading: 'Slides & talks', kinds: ['slides', 'talk'] },
-]
-	.map((s) => ({
-		...s,
-		items: all.filter((e) => s.kinds.includes(e.data.kind)),
-	}))
-	.filter((s) => s.items.length > 0);
+// `file` / `thumb` are relative to public/; `url` is an absolute external link.
+const local = (p?: string) => (p ? `${BASE_URL}/${p.replace(/^\/+/, '')}` : undefined);
 
-// `file` is relative to public/; `url` is an absolute external link.
-const hrefOf = (d: { file?: string; url?: string }) =>
-	d.file ? `${BASE_URL}/${d.file.replace(/^\/+/, '')}` : d.url;
+const sections = [
+	{ heading: 'Posters', kinds: ['poster'], poster: true },
+	{ heading: 'Talks & slides', kinds: ['slides', 'talk'], poster: false },
+].filter((s) => all.some((e) => s.kinds.includes(e.data.kind)));
 
 const entries = await Promise.all(
 	sections.map(async (s) => ({
 		...s,
 		items: await Promise.all(
-			s.items.map(async (e) => ({
-				entry: e,
-				Body: (await render(e)).Content,
-				href: hrefOf(e.data),
-			})),
+			all
+				.filter((e) => s.kinds.includes(e.data.kind))
+				.map(async (e) => ({
+					entry: e,
+					Body: (await render(e)).Content,
+					href: local(e.data.file) ?? e.data.url,
+					thumb: local(e.data.thumb),
+				})),
 		),
 	})),
 );
@@ -58,26 +55,28 @@ const entries = await Promise.all(
 					<section>
 						<h2>{s.heading}</h2>
 						<ul class="items">
-							{s.items.map(({ entry, Body, href }) => (
-								<li>
-									<h3>{entry.data.title}</h3>
-									<p class="meta">
-										{entry.data.event}
-										{entry.data.location && ` · ${entry.data.location}`} · {entry.data.date}
-									</p>
-									<div class="body">
-										<Body />
-									</div>
-									{href && (
-										<a
-											class="button"
-											href={href}
-											target="_blank"
-											rel="noopener"
-										>
-											{entry.data.file ? 'Open PDF' : 'Open link'}
+							{s.items.map(({ entry, Body, href, thumb }) => (
+								<li class:list={['item', { poster: s.poster }]}>
+									{thumb && (
+										<a class="thumb" href={href} target="_blank" rel="noopener">
+											<img src={thumb} alt={`First page of: ${entry.data.title}`} loading="lazy" />
 										</a>
 									)}
+									<div class="text">
+										<h3>{entry.data.title}</h3>
+										<p class="meta">
+											{entry.data.event}
+											{entry.data.location && ` · ${entry.data.location}`} · {entry.data.date}
+										</p>
+										<div class="body">
+											<Body />
+										</div>
+										{href && (
+											<a class="button" href={href} target="_blank" rel="noopener">
+												{entry.data.file ? 'Open PDF' : 'Open link'}
+											</a>
+										)}
+									</div>
 								</li>
 							))}
 						</ul>
@@ -102,20 +101,40 @@ const entries = await Promise.all(
 		padding: 0;
 		margin: 0;
 	}
-	.items li {
-		margin: 0 0 1.5rem 0;
+	.item {
+		display: grid;
+		grid-template-columns: 200px 1fr;
+		gap: 1.2rem;
+		align-items: start;
+		margin: 0 0 1.8rem 0;
 	}
-	.items h3 {
+	.item.poster {
+		grid-template-columns: 150px 1fr;
+	}
+	.thumb img {
+		width: 100%;
+		height: auto;
+		display: block;
+		border: 1px solid var(--gray);
+		border-radius: 0.25rem;
+		background: #fff;
+	}
+	.thumb:hover img {
+		border-color: var(--accent);
+	}
+	.text h3 {
 		margin: 0;
-		font-size: 1.1rem;
+		font-size: 1.05rem;
+		line-height: 1.35;
 	}
 	.meta {
-		margin: 0.1rem 0 0.4rem 0;
-		font-size: 0.9rem;
+		margin: 0.2rem 0 0.4rem 0;
+		font-size: 0.88rem;
 		color: #5a5a5a;
 	}
 	.body :global(p) {
 		margin: 0 0 0.5rem 0;
+		font-size: 0.95rem;
 	}
 	.button {
 		display: inline-block;
@@ -128,5 +147,14 @@ const entries = await Promise.all(
 	.button:hover {
 		background: var(--accent);
 		color: var(--white);
+	}
+	@media (max-width: 560px) {
+		.item,
+		.item.poster {
+			grid-template-columns: 1fr;
+		}
+		.thumb {
+			max-width: 260px;
+		}
 	}
 </style>

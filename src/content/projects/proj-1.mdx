@@ -1,10 +1,13 @@
 ---
-title: "Quantum Portfolio Optimization with QAOA (QAMP)"
+title: "Quantum Portfolio Optimization with QAOA (QAMP 2025)"
 slug: "proj-1"
 year: 2026
-tags: ["QAOA", "Qiskit", "Finance"]
+tags: ["QAOA", "XY-mixer", "IBM Quantum", "Finance"]
 ---
 
-Project developed as a mentee in the IBM Quantum Qiskit Advocate Mentorship Program (Nov 2025 – Feb 2026). It focuses on the design of cost Hamiltonians for portfolio optimization and on the evaluation of QAOA performance under realistic hardware constraints.
+Team project in the IBM Quantum Qiskit Advocate Mentorship Program (Nov 2025 – Feb 2026). Starting from historical asset data (expected returns $\mu$ and a Ledoit–Wolf-shrunk covariance $\Sigma$), the mean–variance problem $\max_x\, \mu^T x - \lambda\, x^T \Sigma x$ with a budget constraint is cast as a QUBO and solved with QAOA using an XY-mixer that preserves the number of selected assets.
 
+The workflow benchmarks QAOA against brute force and CVXPY, sweeps the risk-aversion parameter $\lambda$, runs GPU simulations, and compares ideal, noisy (fake backend) and real IBM Quantum hardware executions.
+
+<a href="https://github.com/chanakyaVBSL/quantum-portfolio-qaoa" target="_blank" rel="noopener">Code</a> ·
 <a href="https://www.credly.com/badges/3a5d8400-18c2-488d-bce4-d8ef8aa4da31/public_url" target="_blank" rel="noopener">QAMP badge</a>

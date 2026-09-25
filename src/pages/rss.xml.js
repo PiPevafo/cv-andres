@@ -1,16 +1,21 @@
 import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { BASE_URL, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
+// Feed of posters, slides and talks (newest first).
 export async function GET(context) {
-	const posts = await getCollection('blog');
+	const items = (await getCollection('presentations')).sort(
+		(a, b) => b.data.year - a.data.year || b.data.order - a.data.order,
+	);
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
-		items: posts.map((post) => ({
-			...post.data,
-			link: `/blog/${post.id}/`,
+		items: items.map((e) => ({
+			title: e.data.title,
+			description: `${e.data.event} · ${e.data.date}`,
+			pubDate: new Date(`${e.data.year}-01-01`),
+			link: e.data.file ? `${BASE_URL}/${e.data.file}` : e.data.url ?? `${BASE_URL}/presentations`,
 		})),
 	});
 }

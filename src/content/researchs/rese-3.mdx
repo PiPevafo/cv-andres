@@ -1,0 +1,16 @@
+---
+title: "Two-Sided Bounds on Entanglement Growth in Quantum Circuits with Native Three-Qubit Gates"
+slug: "rese-3"
+year: 2026
+importance: 3
+tags: ["Entanglement", "Nonstabilizerness", "Minimal cut", "Ongoing"]
+---
+
+**Universidad de los Andes and QuanTIC (Universidad del Valle), with William E. Salazar (CQT, NUS) and Javier Madroñero · 2026 – present.**
+
+Toffoli, CCZ and CSWAP gates are now implemented natively on superconducting processors. Being non-Clifford, they inject nonstabilizerness together with entanglement at a rate set by the architecture rather than by the compiler. I study $L$-qubit circuits built from a two-qubit substrate of density $g^{(2)}$ (Clifford or Haar), doped with probability $\delta$ per layer by three-qubit gates of density $g^{(3)}$ (Haar or controlled-Haar, a proxy for Toffoli/CCZ/CSWAP).
+
+- **Lower bound.** Contracting the averaged purity layer by layer gives $\Pr[S_2(x,T) \ge vT - f(x)] \ge 1 - 2^{-f(x)}$ for $f(x) = \Omega(\log x)$, with $v = \left|\log_2\!\left[1 - g^{(2)}/5 - \delta g^{(3)}/3 + (g^{(2)}/5)\,\delta g^{(3)}\right]\right|$.
+- **Upper bound.** The minimal cut, evaluated in polynomial time by a ZX-inspired graph algorithm, bounds every Rényi entropy circuit by circuit. Read as the world-line of a walker, its count is multinomial with mean $(g^{(2)} + \delta g^{(3)})T$, and a Bhatia–Davis argument bounds the annealed minimal cut without a replica computation.
+
+The two results sandwich the entanglement velocity, $v_b \le v_E^{(S)} \le v_E^{(N_{\min})}$, both scaling as $1/L$. Since the same circuits produce $t$-doped states with $t = \delta T$, the gate layout also bounds their nonstabilizerness. Paper in preparation.

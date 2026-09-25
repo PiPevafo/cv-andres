@@ -48,7 +48,9 @@ const presentations = defineCollection({
 		location: z.string().optional(),
 		date: z.string(), // display string, e.g. "Nov 25–29, 2024"
 		year: z.number().min(2000),
-		file: z.string().optional(),
+		order: z.number().optional().default(0), // tie-breaker within a year (higher = newer)
+		file: z.string().optional(), // path inside public/
+		thumb: z.string().optional(), // preview image inside public/
 		url: z.string().optional(),
 	}),
 });
