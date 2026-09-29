@@ -71,8 +71,10 @@ And also I like to play football, I'm not really good, but I have fun lol.
 
 <div class="gallery">
   <figure class="g-guitar">
-    <img src={BASE_URL + "/images/guitar.jpg"} alt="Playing the electric guitar" loading="lazy"/>
-    <figcaption>Playing the electric guitar.</figcaption>
+    <video controls preload="metadata" playsinline poster={BASE_URL + "/images/hotel-california-poster.jpg"}>
+      <source src={BASE_URL + "/videos/hotel-california-solo.mp4"} type="video/mp4"/>
+    </video>
+    <figcaption>Excerpt of the Hotel California solo.</figcaption>
   </figure>
   <figure class="g-friends">
     <img src={BASE_URL + "/images/ictp-saifr-friends.jpg"} alt="With friends in a lecture hall at ICTP-SAIFR" loading="lazy"/>

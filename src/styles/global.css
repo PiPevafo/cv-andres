@@ -97,3 +97,6 @@ a {
 	}
 	.g-guitar img { flex: none; }
 }
+
+.gallery video{width:100%;border-radius:.4rem;object-fit:cover;flex:1;min-height:0;background:#000}
+@media (max-width:560px){.gallery video{flex:none;max-height:70vh}}
