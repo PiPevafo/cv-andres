@@ -59,3 +59,41 @@ a {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+/* Photo gallery (home page, "Beyond physics") */
+.gallery {
+	display: grid;
+	grid-template-columns: 1fr 1.3fr;
+	grid-template-areas: 'guitar friends' 'guitar football';
+	gap: 1rem;
+	margin: 1.2rem 0 0 0;
+}
+.gallery figure {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+.gallery img {
+	width: 100%;
+	display: block;
+	border-radius: 0.4rem;
+	object-fit: cover;
+}
+.gallery figcaption {
+	font-size: 0.82rem;
+	line-height: 1.35;
+	color: #5a5a5a;
+}
+.g-guitar { grid-area: guitar; }
+.g-guitar img { flex: 1; min-height: 0; }
+.g-friends { grid-area: friends; }
+.g-football { grid-area: football; }
+.g-friends img, .g-football img { aspect-ratio: 16 / 10; }
+@media (max-width: 560px) {
+	.gallery {
+		grid-template-columns: 1fr;
+		grid-template-areas: 'guitar' 'friends' 'football';
+	}
+	.g-guitar img { flex: none; }
+}
