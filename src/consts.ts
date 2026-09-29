@@ -10,7 +10,6 @@ export const LINKS = {
 	github: 'https://github.com/PiPevafo',
 	linkedin: 'https://www.linkedin.com/in/andrés-felipe-valencia-f-928a50271/',
 	researchgate: 'https://www.researchgate.net/profile/Andres-Valencia-Fonseca',
-	scholar: 'https://scholar.google.com/citations?user=GBXmncYAAAAJ&hl=es',
 	email: 'andresfvalenciafonseca2010@gmail.com',
 	emailInstitutional: 'andres.valencia.fonseca@correounivalle.edu.co',
 };
